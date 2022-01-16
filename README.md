@@ -2,6 +2,8 @@
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that A workflows app
 
+> This app can auto reply pr or issue and auto distribution that to component owner
+
 ## Setup
 
 ```sh
