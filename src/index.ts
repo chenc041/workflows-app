@@ -1,31 +1,24 @@
 import { Context, Probot } from 'probot';
-
-const defaultConfig = {
-  issueOpenedReply: 'Thanks for opening this issue!',
-  prOpenedReply: 'Thanks for submit this pr!',
-}
+import { features } from './features';
 
 export = (app: Probot) => {
   app.on('issues.opened', async (context) => {
     const config = await getConfig(context);
-    const issueComment = context.issue({
-      body: config.issueOpenedReply,
-    });
-    await context.octokit.issues.createComment(issueComment);
+    if (!config) return;
+    const utils = features(context, config);
+    await utils.replyIssue();
   });
 
   app.on('pull_request.opened', async (context) => {
     const config = await getConfig(context);
-    const prComment = context.issue({
-      body: config.prOpenedReply,
-    });
-    await context.octokit.issues.createComment(prComment);
-    app.log.info('pull_request.opened', prComment, context);
+    if (!config) return;
+    const utils = features(context, config);
+    await utils.replyPr();
   });
 
   // get repo config for bot
-  const getConfig = async (context: Context): Promise<Record<string, any>> => {
-    return await context.config('bot_config.yml') ?? defaultConfig;
+  const getConfig = async (context: Context): Promise<Record<string, any> | null> => {
+    return await context.config('workflows_app_config.yml');
   };
 
   // For more information on building apps:

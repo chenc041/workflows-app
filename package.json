@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "tsc && esbuild src/index.ts --bundle --platform=node --minify --outdir=lib",
-    "start": "pnpm build && probot run ./lib/index.js",
+    "start": "LOG_LEVEL=debug && pnpm build && probot run ./lib/index.js",
     "test": "jest"
   },
   "dependencies": {
