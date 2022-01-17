@@ -17,7 +17,7 @@ export = (app: Probot) => {
   app.on('pull_request.opened', async (context) => {
     const config = await getConfig(context);
     const prComment = context.issue({
-      body: config.issueOpenedReply,
+      body: config.prOpenedReply,
     });
     await context.octokit.issues.createComment(prComment);
     app.log.info('pull_request.opened', prComment, context);
