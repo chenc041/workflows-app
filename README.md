@@ -4,14 +4,29 @@
 
 > This app can auto reply pr or issue and auto distribution that to component owner
 
+
+## How to use
+- [install workflows-app](https://github.com/apps/workflows-app)
+
+#### Config file
+> Create a file called bot_config.yml in the .github directory, the bot will read the config file. <br/>
+> Get example info can see config.example.yml
+
+### Config file field meanings
+| Key              | Type   | Description                    |
+|------------------|--------|--------------------------------|
+| issueOpenedReply | string | auto reply when a issue opened |
+| prOpenedReply    | string | auto reply when a issue opened |
+
+
 ## Setup
 
 ```sh
 # Install dependencies
-npm install
+pnpm install
 
 # Run the bot
-npm start
+pnpm start
 ```
 
 ## Docker
