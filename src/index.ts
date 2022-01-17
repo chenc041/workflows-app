@@ -25,7 +25,7 @@ export = (app: Probot) => {
 
   // get repo config for bot
   const getConfig = async (context: Context): Promise<Record<string, any>> => {
-    return await context.config('config.yml') ?? defaultConfig;
+    return await context.config('bot_config.yml') ?? defaultConfig;
   };
 
   // For more information on building apps:
