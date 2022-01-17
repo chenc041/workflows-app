@@ -16,7 +16,7 @@
 | Key              | Type   | Description                    |
 |------------------|--------|--------------------------------|
 | issueOpenedReply | string | auto reply when a issue opened |
-| prOpenedReply    | string | auto reply when a issue opened |
+| prOpenedReply    | string | auto reply when a pr opened    |
 
 
 ## Setup
