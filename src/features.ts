@@ -7,7 +7,6 @@ class Features {
     this.context = context;
   }
 
-
   async labels(names: string[]) {
     const { owner, repo, issue_number } = await this.context.issue();
     await this.context.octokit.issues.addLabels({ owner, repo, issue_number, labels: names });
@@ -15,19 +14,39 @@ class Features {
 
   async assignee(assignees: string[]) {
     const issueInfo = await this.context.issue();
-    await this.context.octokit.issues.addAssignees({ ...issueInfo, assignees })
+    await this.context.octokit.issues.addAssignees({ ...issueInfo, assignees });
+  }
+
+  async reply(content: string) {
+    const issueComment = this.context.issue({
+      body: content,
+    });
+    await this.context.octokit.issues.createComment(issueComment);
+  }
+
+  async parseIssueTitle(title: string) {
+    const issueTypeReg = /^\w+/gim;
+    const issueType = title.match(issueTypeReg);
+
+    const componentName = title
+      .match(/\(\w+\)/g)
+      ?.map((m) => m.replaceAll(/\(|\)/, ''))
+      .join('');
+
+    return {
+      labels: issueType,
+      contributor: componentName,
+    };
   }
 
   // private log(identify: string, ...message: any[]) {
   //   this.context.log.info(identify, message);
   // }
 
-  // private static async translateIssueOrPr(text: string) {
+  // private static async translateContext(text: string) {
   //   const result = await translate(text, {to: 'en'});
   //   return result.text;
   // }
-
 }
 
-export const features = (context: Context) =>
-  new Features(context);
+export const features = (context: Context) => new Features(context);

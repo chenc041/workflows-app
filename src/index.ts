@@ -5,29 +5,31 @@ import type { ConfigInterface } from './config';
 export = (app: Probot) => {
   app.on('issues.opened', async (context) => {
     const config = await getConfig(context);
-    if (!config) return;
+    if (!config || !config.components) return;
     const utils = features(context);
     const issueInfo = context.issue();
     const issueRawInfo = await context.octokit.issues.get(issueInfo);
     const { title } = issueRawInfo.data;
-    const issueTypeReg = /^\w+/gim;
-    const componentReg = /\(\w+\)/gim;
-    const issueType = title.match(issueTypeReg);
-    const component = title.match(componentReg);
+    const { labels, contributor } = await utils.parseIssueTitle(title);
 
-    if (component && component.length > 0) {
-      const componentName = component[0].replace('(', '').replace(')', '');
-      await utils.assignee([config.components[componentName]])
+    if (contributor) {
+      await utils.assignee([config.components[contributor]]);
     }
 
-    if (issueType && issueType.length > 0) {
-      await utils.labels(issueType);
+    if (labels && labels.length > 0) {
+      await utils.labels(labels);
     }
+  });
 
+  app.on('pull_request.closed', async (context) => {
+    const config = await getConfig(context);
+    if (!config || !config.prClosedReply) return;
+    const utils = features(context);
+    await utils.reply(config.prClosedReply);
   });
 
   // get repo config for bot
-  const getConfig = async (context: Context): Promise<ConfigInterface | null> => {
+  const getConfig = async (context: Context): Promise<Partial<ConfigInterface> | null> => {
     return await context.config('workflows_app_config.yml');
   };
 
