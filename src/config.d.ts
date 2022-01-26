@@ -3,4 +3,5 @@ export interface ConfigInterface {
   prOpenedReply: string;
   components: Record<string, string>;
   prClosedReply: string;
+  previewUrl: string;
 }

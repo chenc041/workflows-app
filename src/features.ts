@@ -25,16 +25,12 @@ class Features {
   }
 
   async parseIssueTitle(title: string) {
-    const issueTypeReg = /^\w+/gim;
-    const issueType = title.match(issueTypeReg);
-
     const componentName = title
       .match(/\(\w+\)/g)
-      ?.map((m) => m.replaceAll(/\(|\)/, ''))
+      ?.map((m) => m.replace(/\(|\)/gi, ''))
       .join('');
 
     return {
-      labels: issueType,
       contributor: componentName,
     };
   }

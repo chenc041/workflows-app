@@ -13,13 +13,14 @@
 > Get example info can see config.example.yml
 
 ### Config file field meanings
-| Key              | Type   | Description                    |
-|------------------|--------|--------------------------------|
-| issueOpenedReply | string | auto reply when a issue opened |
-| prOpenedReply    | string | auto reply when a pr opened    |
+| Key              | Type   | Description                        | example                                                     |
+|------------------|--------|------------------------------------|-------------------------------------------------------------|
+| issueOpenedReply | string | auto reply when a issue opened     | `Thanks for opening this issue!`                            |
+| prOpenedReply    | string | auto reply when a pr opened        | `The ${preview} will be available after the CI is complete` |
+| previewUrl       | string | auto reply the project preview url | `https://xxx-preview-${pull_num}.xx.com`                    |
+| components       | object | the components owner map           | `table: chenc`                                              |
 
-
-## Setup
+## Dev
 
 ```sh
 # Install dependencies
