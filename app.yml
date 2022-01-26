@@ -15,17 +15,19 @@
 default_events:
   - issues
   - pull_request
+  - issue_comment
+  - commit_comment
+  - pull_request_review
+  - pull_request_review_comment
+  - label
   # - check_run
   # - check_suite
-  # - commit_comment
   # - create
   # - delete
   # - deployment
   # - deployment_status
   # - fork
   # - gollum
-  # - issue_comment
-# - label
 # - milestone
 # - member
 # - membership
@@ -36,8 +38,6 @@ default_events:
 # - project_card
 # - project_column
 # - public
-# - pull_request_review
-# - pull_request_review_comment
 # - push
 # - release
 # - repository

@@ -1,3 +1,5 @@
 issueOpenedReply: 'Thanks for opening this issue!'
-
-prOpenedReply: 'Thanks for submit this pr!'
+prOpenedReply: 'The ${preview} will be available after the CI is complete'
+previewUrl: 'https://xxx-preview-${pull_num}.xx.com'
+compoents:
+  table: chenc
