@@ -40,13 +40,16 @@ export = (app: Probot) => {
     const prInfo = await context.pullRequest();
     if (!config || !config.prOpenedReply) return;
     const utils = features(context);
-    if (config.prOpenedReply.includes('${preview}') && config.previewUrl) {
+    const { previewUrl, prOpenedReply } = config;
+    if (prOpenedReply.includes('${preview}') && previewUrl) {
       await utils.reply(
         config.prOpenedReply.replace(
           '${preview}',
-          `[preview](${config.previewUrl.replace('${pull_num}', prInfo.pull_number)})`
+          `[preview](${previewUrl.replace('${pull_num}', prInfo.pull_number)})`
         )
       );
+    } else if (prOpenedReply) {
+      await utils.reply(prOpenedReply);
     }
   });
 
