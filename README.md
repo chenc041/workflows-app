@@ -9,7 +9,7 @@
 - [install workflows-app](https://github.com/apps/workflows-app)
 
 #### Config file
-> Create a file called bot_config.yml in the .github directory, the bot will read the config file. <br/>
+> Create a file called workflows_app_config.yml in the .github directory, the bot will read the config file. <br/>
 > Get example info can see config.example.yml
 
 ### Config file field meanings
