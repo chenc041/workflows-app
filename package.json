@@ -24,7 +24,7 @@
     "build"
   ],
   "devDependencies": {
-    "@types/jest": "^28.1.8",
+    "@types/jest": "^29.0.0",
     "@types/node": "^18.7.13",
     "esbuild": "^0.15.5",
     "jest": "^27.5.1",
